@@ -13,11 +13,12 @@ mongoose
   .catch((e) => console.log("Database Error", e.toString()));
 
 app.use(express.json());
+
 app.use("/assets", express.static("public"));
 app.use(morgan("tiny"));
 
 app.use("/", indexRouter);
-app.use((err, res, req, next) => {
+app.use((err, req, res, next) => {
   const errMsg = err.toString() || "Something went wrong";
   res.status(500).json({ data: null, err: errMsg });
 });
